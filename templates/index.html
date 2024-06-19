@@ -1,0 +1,173 @@
+{% extends 'base.html' %} {% load static %} {% block content %}
+
+<!--Home Section Design-->
+{% for profile in profile %}
+<section class="home" id="home">
+  <div class="home-content">
+    <h3>Hi, Myself</h3>
+    <h1>{{profile.name}}</h1>
+    <h3>And I'm a <span class="typing"></span></h3>
+    <p>{{profile.summary}}</p>
+    <div class="social-media">
+      {% if profile.facebook_link %}
+      <a href="{{ profile.facebook_link }}" target="_blank"><i class="fa-brands fa-facebook"></i></a>
+      {% endif %}
+      {% if profile.instagram_link %}
+      <a href="{{ profile.instagram_link }}" target="_blank"><i class="fa-brands fa-instagram"></i></a>
+      {% endif %}
+      {% if profile.twitter_link %}
+      <a href="{{ profile.twitter_link }}" target="_blank"><i class="fa-brands fa-x-twitter"></i></a>
+      {% endif %}
+      {% if profile.linkedin_link %}
+      <a href="{{ profile.linkedin_link }}" target="_blank"><i class="fa-brands fa-linkedin"></i></a>
+      {% endif %}
+      {% if profile.github_link %}
+      <a href="{{ profile.github_link }}" target="_blank"><i class="fa-brands fa-github"></i></a>
+      {% endif %}
+    </div>
+    {% if profile.resume %}
+    <a href="{{ profile.resume.url }}" target="_blank" class="btn">Download CV</a>
+    {% endif %}
+  </div>
+  <div class="home-img">
+    {% if profile.profile_image %}
+    <div class="container">
+      <div class="box">
+        <div class="spin-container">
+          <div class="shape">
+            <div class="bd" style="background-image: url('{{ profile.profile_image.url }}');"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    {% endif %}
+  </div>
+</section>
+
+
+<!--About Section Design-->
+<section class="about" id="about">
+  <div class="about-img">
+    {% if profile.about_image %}
+    <img src="{{profile.about_image.url}}" alt="Saroj picture" />
+    {% endif %}
+  </div>
+  <div class="about-content">
+    <h2 class="heading">About <span>Me</span></h2>
+    <h3>Backend Developer</h3>
+    <p>
+      With a solid foundation in Information Technology, honed through my
+      studies at Texas College of Management & IT, I am passionate about
+      leveraging my technical skills to create innovative solutions. My
+      proficiency in Python and experience with Django, alongside a basic
+      command of SQL, HTML, and CSS, enable me to develop robust web
+      applications. <br><br> Beyond my academic pursuits, I enjoy playing cricket and
+      football, engaging in gaming, and immersing myself in music, which
+      provides a balanced blend to my lifestyle. I am always eager to learn and
+      grow, both personally and professionally, while contributing to impactful
+      projects.
+    </p>
+    <a href="#home" class="btn">Find More</a>
+  </div>
+</section>
+
+<!--Services Section Design-->
+<section class="services" id="services">
+  <h2 class="heading">My <span>Services</span></h2>
+  <br /><br />
+  <div class="services-container">
+    {% for service in service %}
+    <div class="service-box">
+      <i class="{{service.icon}}"></i>
+      <h3>{{service.title}}</h3>
+      <p>{{service.description}}</p>
+    </div>
+    {% endfor %}
+  </div>
+</section>
+
+<!-- Portfolio Section Design -->
+<section class="portfolio" id="portfolio">
+  <h2 class="heading">My <span>Portfolio</span></h2>
+  <br /><br />
+  <div class="portfolio-container">
+    {% for project in project %}
+    <div class="portfolio-box">
+      <div class="portfolio-image">
+        <img src="{{ project.image.url }}" alt="{{ project.title }}" />
+        <div class="portfolio-description">
+          <h3>{{project.title}}</h3>
+          <p>{{project.description}}</p>
+          <div class="portfolio-links">
+            <a href="{{ project.github_link }}" target="_blank" class="btn"
+              >GitHub</a
+            >
+            <a href="{{ project.demo_link }}" target="_blank" class="btn"
+              >Live Demo</a
+            >
+          </div>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</section>
+
+<!--Contact Section Design-->
+<section class="contact" id="contact">
+  <h2 class="heading">Contact <span>Me</span></h2>
+  <br /><br />
+  <div class="contact-container">
+    <div class="contact-info">
+      <h3>Contact Information</h3>
+
+      {% if profile.phone_number %}
+      <p><i class="fas fa-phone"></i>  {{profile.phone_number}}</p>
+      {% endif %} {% if profile.email %}
+      <p><i class="fas fa-envelope"></i>  {{profile.email}}</p>
+      {% endif %}
+
+      <div class="social-media">
+        {% if profile.facebook_link %}
+        <a href="{{ profile.facebook_link }}" target="_blank"
+          ><i class="fa-brands fa-facebook"></i
+        ></a>
+        {% endif %} {% if profile.instagram_link %}
+        <a href="{{ profile.instagram_link }}" target="_blank"
+          ><i class="fa-brands fa-instagram"></i
+        ></a>
+        {% endif %} {% if profile.twitter_link %}
+        <a href="{{ profile.twitter_link }}" target="_blank"
+          ><i class="fa-brands fa-x-twitter"></i
+        ></a>
+        {% endif %} {% if profile.linkedin_link %}
+        <a href="{{ profile.linkedin_link }}" target="_blank"
+          ><i class="fa-brands fa-linkedin"></i
+        ></a>
+        {% endif %} {% if profile.github_link %}
+        <a href="{{ profile.github_link }}" target="_blank"
+          ><i class="fa-brands fa-github"></i
+        ></a>
+        {% endif %}
+      </div>
+    </div>
+    <div class="contact-form">
+    <h1>Leave a message</h1>
+      <form action="#" method="post">
+        {% csrf_token %}
+        <input type="text" name="name" placeholder="Full Name" required /><br />
+        <input
+          type="email"
+          name="email"
+          placeholder="Email Address"
+          required
+        /><br />
+        <textarea name="message" placeholder="Leave a message here" required></textarea
+        ><br /><br /><br />
+        <button type="submit" class="btn">Send Message</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+{% endfor %} {% endblock %}
