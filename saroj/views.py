@@ -3,7 +3,7 @@ from .models import *
 
 # Create your views here.
 def home(request):
-    profile=Profile.objects.all()
+    profile=Profile.objects.all()[0:1]
     project=Project.objects.all()   
     contact=Contact.objects.all()
     service=Service.objects.all()
